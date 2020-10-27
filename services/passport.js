@@ -22,18 +22,15 @@ passport.use(
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback",
-      proxy: true
+      proxy: true,
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }).then((existingUser) => {
-        if (existingUser) {
-          done(null, existingUser); // this go to as args in serializeUser()
-        } else {
-          new User({ googleId: profile.id }).save().then((user) => {
-            done(null, user); // this go to as args in serializeUser()
-          });
-        }
-      });
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) {
+        return done(null, existingUser); // this go to as args in serializeUser()
+      }
+      const user = await new User({ googleId: profile.id }).save();
+      done(null, user); // this go to as args in serializeUser()
     }
   )
 );

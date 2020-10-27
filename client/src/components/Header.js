@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
-import Payments from "./Payments";
+import "./LoadingSpinner.css";
+// import Loading from "./Loading";
+// import Payments from "./Payments";
 
 class Header extends Component {
+  loadingLine() {
+    return (
+      <div className="loadingio-spinner-rolling-k1kieaaxnfn">
+        <div className="ldio-htjza9k64sv">
+          <div></div>
+        </div>
+      </div>
+    );
+  }
+
   renderContent() {
     switch (this.props.auth) {
-      case null:
-        return;
+      // case null:
+      //   return <Loading />; // TODO: why they are delay to display
       case false:
         return (
           <li>
@@ -18,10 +29,29 @@ class Header extends Component {
       default:
         return [
           <li key="1">
-            <Payments />
+            <Link to="/checkout">
+              <button disabled={this.props.auth ? false : true} className="btn">
+                Add Credits
+              </button>
+            </Link>
+          </li>,
+          <li
+            key="3"
+            style={{
+              margin: "0 10px",
+              color: "yellow",
+              fontWeight: "bold",
+            }}
+          >
+            CREDITS:
+            {this.props.auth ? this.props.auth.credits : this.loadingLine()}
           </li>,
           <li key="2">
-            <a href="/api/logout">Logout</a>
+            {this.props.auth ? (
+              <a href="/api/logout">Logout</a>
+            ) : (
+              <a href="/surveys">Logout</a>
+            )}
           </li>,
         ];
     }

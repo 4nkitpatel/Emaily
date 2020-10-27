@@ -1,4 +1,5 @@
-import "materialize-css/dist/css/materialize.min.css";
+import "materialize-css/dist/css/materialize.min.css"; // one time import from our nodemodule so we can use it anywhere and we didnt provide from bcz we dont want any ref just we want to load css first thats why in this file we did it
+// we didnt do "./materialize-css... " we did directly "materialize-css/..." when webpack see direct like this it look up that folder in node modules
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -17,4 +18,3 @@ ReactDOM.render(
   </Provider>,
   document.querySelector("#root")
 );
-
