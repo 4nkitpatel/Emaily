@@ -1,3 +1,6 @@
+// TODO : if possible make this component resuable for other project
+// TODO: error checking is still left of form elemnt like address name and all
+
 import React, { useState } from "react";
 // import StripeCheckout from "react-stripe-checkout";
 import { loadStripe } from "@stripe/stripe-js";
@@ -86,6 +89,7 @@ const CheckoutForm = ({ handleToken }) => {
         });
         handleToken(res.data);
       } catch (err) {
+        console.log(err.response.data);
         setError(err.response.data.message);
         setProcessingTo(false);
       }
@@ -150,10 +154,17 @@ const CheckoutForm = ({ handleToken }) => {
   );
 };
 
-const Payments = ({ handleToken }) => (
-  <Elements stripe={stripePromise}>
-    <CheckoutForm handleToken={handleToken} />
-  </Elements>
-);
+const Payments = ({ handleToken, auth }) =>
+  auth ? (
+    <Elements stripe={stripePromise}>
+      <CheckoutForm handleToken={handleToken} />
+    </Elements>
+  ) : (
+    <h3 className="red-text center">You Must Logged In Fist</h3>
+  );
 
-export default connect(null, actions)(Payments);
+const mapStateToProps = (state) => {
+  return { auth: state.auth };
+};
+
+export default connect(mapStateToProps, actions)(Payments);

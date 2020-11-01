@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 const keys = require("./config/keys");
 require("./models/User"); // this will confiure and make the model or collection
+require("./models/Survey"); // this will confiure and make the model or collection
 require("./services/passport"); // we have to require("./models/User") do this first bca passport file uses User model so before that user should be initiated
 
 mongoose.connect(keys.mongoURI, {
@@ -30,6 +31,7 @@ app.use(passport.session());
 // authRoutes returning a function so we can call it by appending brackets and passing arg app, eg.(app)
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   // express serve  production assets LIKE our build version of client (main.js or main.css)

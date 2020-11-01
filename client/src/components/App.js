@@ -7,9 +7,8 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Payments from "./Payments";
 import history from "../history";
-
-const Dashboard = () => <h1>Dashboard</h1>;
-const laaaa = () => <h1>laaaa</h1>;
+import Dashboard from "./Dashboard";
+import SurveyNew from "./surveys/SurveyNew";
 
 class App extends React.Component {
   componentDidMount() {
@@ -25,7 +24,7 @@ class App extends React.Component {
             <Route path="/" exact component={Landing} />
             <Route path="/surveys" exact component={Dashboard} />
             <Route path="/checkout" exact component={Payments} />
-            <Route path="/surveys/new" component={laaaa} />
+            <Route path="/surveys/new" component={SurveyNew} />
           </Switch>
         </Router>
       </div>
