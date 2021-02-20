@@ -21,9 +21,9 @@ module.exports = (app) => {
     res.send("Thanks for voting!"); // TODO: handle this appropriatly
   });
 
-  // TODO ---------------------------------------------------------------------
-  // * MOST IMP - NGROCK URL CHAGE SO UPDATE IT IN SENDRID EVERY 8 HR MAY BE
-  // TODO ---------------------------------------------------------------------
+  // TODO ------------------------------------------------------------------------------------------------
+  // * MOST IMP - NGROCK URL CHAGE SO UPDATE IT IN SENDRID EVERY 8 HR MAY BE / in production its our email
+  // TODO ------------------------------------------------------------------------------------------------
   /*
     we dont want to store dublicate respose when user click twice in yes button 
     and that user may be in two suveys so per survey only one res should allowed
